@@ -2,23 +2,47 @@ var date = document.querySelector("#bdate");
 var luckyNum = document.querySelector("#luckyn");
 var btn = document.querySelector("#submit");
 
-function show() {
-  document.getElementById("output").innerHTML = `
-    <h1>Hello Vanilla!</h1>
-    <div>
-      We use the same configuration as 
-      <a href="https://parceljs.org" target="_blank" rel="noopener noreferrer">here</a>.
-    </div>
-    `;
-}
-
-function check() {
-  let birthdate = new Date(date);
-  if (birthdate == "Invalid Date") {
-    alert("Please Enter A Valid Date");
+function show(res) {
+  console.log(res);
+  if (res > 0) {
+    document.getElementById("output").innerHTML = `
+      <h1>Ohh!</h1>
+      <div>
+        Your Birthday is not Lucky.
+      </div>
+      `;
   } else {
-    console.log(date);
+    document.getElementById("output").innerHTML = `
+      <h1>Wow!</h1>
+      <div>
+        Your Birthday is Lucky.
+      </div>`;
   }
 }
 
-document.addEventListener(btn, check);
+function check() {
+  let res = "";
+  let birthdate = new Date(date.value);
+  if (birthdate == "Invalid Date") {
+    alert("Please Enter A Valid Date");
+  } else {
+    let num = luckyNum.value;
+    console.log(num);
+    if (num == "") {
+      alert("Please Enter A Valid Number");
+    } else if (num == 0) {
+      res =
+        (birthdate.getDate() + birthdate.getMonth() + birthdate.getFullYear()) %
+        5;
+    } else {
+      res =
+        (birthdate.getDate() + birthdate.getMonth() + birthdate.getFullYear()) %
+        num;
+    }
+    if (res !== "") {
+      show(res);
+    }
+  }
+}
+
+btn.addEventListener("click", check);
