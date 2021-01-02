@@ -1,4 +1,6 @@
-import "./styles.css";
+var date = document.querySelector("#bdate");
+var luckyNum = document.querySelector("#luckyn");
+var btn = document.querySelector("#submit");
 
 document.getElementById("output").innerHTML = `
 <h1>Hello Vanilla!</h1>
